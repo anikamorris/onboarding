@@ -61,10 +61,17 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     let pageControl: UIPageControl = {
         let pageControl: UIPageControl = UIPageControl(frame: .zero)
         pageControl.translatesAutoresizingMaskIntoConstraints = false
-        pageControl.tintColor = .black
+        pageControl.pageIndicatorTintColor = .lightGray
+        pageControl.currentPageIndicatorTintColor = .blue
         return pageControl
     }()
-        
+    let continueButton: UIButton = {
+        let continueButton: UIButton = UIButton(frame: CGRect(x: 100, y: 400, width: 100, height: 50))
+        continueButton.translatesAutoresizingMaskIntoConstraints = false
+        continueButton.setTitle("Continue", for: .normal)
+        continueButton.addTarget(self, action:#selector(self.continueButtonTapped), for: .touchUpInside)
+        return continueButton
+    }()
 
     override func loadView() {
         super.loadView()
@@ -129,8 +136,10 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                 ])
             }
             if index == pages.count - 1 { //if last page, then set that page's rightAnchor to contentView's rightAnchor
+                contentView.addSubview(continueButton)
                 NSLayoutConstraint.activate([
                     page.rightAnchor.constraint(equalTo: contentView.rightAnchor)
+                    
                 ])
             }
         }
@@ -166,7 +175,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         pageImageView.translatesAutoresizingMaskIntoConstraints = false
         page.addSubview(pageImageView)
         pageImageView.widthAnchor.constraint(equalTo: page.widthAnchor, multiplier: 0.9).isActive = true
-        pageImageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        pageImageView.heightAnchor.constraint(equalToConstant: 300).isActive = true
         pageImageView.topAnchor.constraint(equalTo: page.topAnchor, constant: 200).isActive = true
         pageImageView.centerXAnchor.constraint(equalTo: page.centerXAnchor).isActive = true
         
@@ -180,6 +189,11 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         descriptionLabel.heightAnchor.constraint(equalToConstant: 200).isActive = true
         descriptionLabel.topAnchor.constraint(equalTo: pageImageView.bottomAnchor, constant: 50).isActive = true
         descriptionLabel.centerXAnchor.constraint(equalTo: pageImageView.centerXAnchor).isActive = true
+    }
+    
+    @objc func continueButtonTapped() {
+            let loginVC: LoginVC = LoginViewController()
+            self.navigationController?.pushViewController(loginVC, animated: true)
     }
     
 }

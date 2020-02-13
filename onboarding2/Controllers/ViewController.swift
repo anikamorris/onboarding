@@ -69,7 +69,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         let continueButton: UIButton = UIButton(frame: CGRect(x: 100, y: 400, width: 100, height: 50))
         continueButton.translatesAutoresizingMaskIntoConstraints = false
         continueButton.setTitle("Continue", for: .normal)
-        continueButton.addTarget(self, action:#selector(self.continueButtonTapped), for: .touchUpInside)
+        continueButton.addTarget(self, action:#selector(continueButtonTapped), for: .touchUpInside)
         return continueButton
     }()
 
@@ -192,7 +192,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @objc func continueButtonTapped() {
-            let loginVC: LoginVC = LoginViewController()
+            let loginVC: LoginViewController = LoginViewController()
             self.navigationController?.pushViewController(loginVC, animated: true)
     }
     
